@@ -297,7 +297,16 @@ ATENÇÃO!!! Vários endereços destes webservices ainda não foram totalmente
     <producao>
       <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100">http://www.receita.pb.gov.br/nfce</NfeConsultaQR>
     </producao>
-  </UF>  
+  </UF>           
+  <UF>
+        <sigla>AL</sigla>
+        <homologacao>
+            <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100">http://nfce.sefaz.al.gov.br/QRCode/consultarNFCe.jsp</NfeConsultaQR>
+        </homologacao>
+        <producao>
+            <NfeConsultaQR method="QR-CODE" operation="NfeConsultaQR" version="100">http://nfce.sefaz.al.gov.br/QRCode/consultarNFCe.jsp</NfeConsultaQR>
+        </producao>
+  </UF>
   <UF>
     <sigla>PI</sigla>
     <homologacao>
