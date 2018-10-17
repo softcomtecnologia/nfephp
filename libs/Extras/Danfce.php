@@ -211,7 +211,7 @@ class Danfce extends CommonNFePHP implements DocumentoNFePHP
             $this->enderEmit  = $this->dom->getElementsByTagName("enderEmit")->item(0);
             $this->det        = $this->dom->getElementsByTagName("det");
             $this->dest       = $this->dom->getElementsByTagName("dest")->item(0);
-            $this->pag        = $this->dom->getElementsByTagName("pag");
+            $this->pag        = $this->dom->getElementsByTagName("detPag");
             $this->imposto    = $this->dom->getElementsByTagName("imposto")->item(0);
             $this->ICMSTot    = $this->dom->getElementsByTagName("ICMSTot")->item(0);
         }
