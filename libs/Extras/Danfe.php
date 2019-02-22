@@ -361,6 +361,8 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
      */
     protected $debugMode=2;
 
+    protected $cartaCorrecao = false;
+
     /**
      * __construct
      *
@@ -820,31 +822,33 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
             $this->pRodape($xInic, $this->hPrint + 1);
         }
         //loop para páginas seguintes
-        for ($n = 2; $n <= $totPag; $n++) {
-            // fixa as margens
-            $this->pdf->SetMargins($margEsq, $margSup);
-            //adiciona nova página
-            $this->pdf->AddPage($this->orientacao, $this->papel);
-            //ajusta espessura das linhas
-            $this->pdf->SetLineWidth(0.1);
-            //seta a cor do texto para petro
-            $this->pdf->SetTextColor(0, 0, 0);
-            // posição inicial do relatorio
-            $x = $xInic;
-            $y = $yInic;
-            //coloca o cabeçalho na página adicional
-            $y = $this->pCabecalhoDANFE($x, $y, $n, $totPag);
-            //coloca os itens na página adicional
-            $y = $this->pItensDANFE($x, $y+1, $nInicial, $hDispo2, $n, $totPag, $hCabecItens);
-            //coloca o rodapé da página
-            if ($this->orientacao == 'P') {
-                $this->pRodape($xInic, $y + 4);
-            } else {
-                $this->pRodape($xInic, $this->hPrint + 4);
-            }
-            //se estiver na última página e ainda restar itens para inserir, adiciona mais uma página
-            if ($n == $totPag && $this->qtdeItensProc < $qtdeItens) {
-                $totPag++;
+        if (!$this->cartaCorrecao) {
+            for ($n = 2; $n <= $totPag; $n++) {
+                // fixa as margens
+                $this->pdf->SetMargins($margEsq, $margSup);
+                //adiciona nova página
+                $this->pdf->AddPage($this->orientacao, $this->papel);
+                //ajusta espessura das linhas
+                $this->pdf->SetLineWidth(0.1);
+                //seta a cor do texto para petro
+                $this->pdf->SetTextColor(0, 0, 0);
+                // posição inicial do relatorio
+                $x = $xInic;
+                $y = $yInic;
+                //coloca o cabeçalho na página adicional
+                $y = $this->pCabecalhoDANFE($x, $y, $n, $totPag);
+                //coloca os itens na página adicional
+                $y = $this->pItensDANFE($x, $y+1, $nInicial, $hDispo2, $n, $totPag, $hCabecItens);
+                //coloca o rodapé da página
+                if ($this->orientacao == 'P') {
+                    $this->pRodape($xInic, $y + 4);
+                } else {
+                    $this->pRodape($xInic, $this->hPrint + 4);
+                }
+                //se estiver na última página e ainda restar itens para inserir, adiciona mais uma página
+                if ($n == $totPag && $this->qtdeItensProc < $qtdeItens) {
+                    $totPag++;
+                }
             }
         }
         //retorna o ID na NFe
@@ -3132,5 +3136,12 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
             }
         }
         return $saida;
+    }
+
+    public function setCartaCorrecao($carta)
+    {
+        $this->cartaCorrecao = $carta;
+
+        return $this;
     }
 }
