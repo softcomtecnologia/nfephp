@@ -36,9 +36,26 @@ class Asn extends Base
     {
         $certDer = self::pem2Der((string) $certPem);
         $data = self::getOIDdata((string) $certDer, '2.16.76.1.3.3');
+
+        if (sizeof($data) === 0) {
+            return self::getCPF($certDer);
+        }
+
         return (string) $data[0][1][1][0][1];
     }
-    
+    /**
+     * @param $certDer
+     * @return bool|string
+     */
+    public static function getCPF($certDer)
+    {
+        $data = self::getOIDdata((string) $certDer, '2.16.76.1.3.1');
+        $data = (string) $data[0][1][1][0][1];
+        $dataNascimento = substr($data, 0, 8);
+        $cpf = substr($data, 8, 11);
+
+        return $cpf;
+    }
     /**
      * getOIDdata
      * Recupera a informação referente ao OID contido no certificado
