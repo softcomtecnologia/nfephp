@@ -1395,11 +1395,12 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         //CNPJ
         $x += $w;
         $w = ($maxW-(2*$w));
-        $texto = 'CNPJ';
+        $doc = !empty($this->emit->getElementsByTagName("CNPJ")->item(0)->nodeValue) ? "CNPJ" : "CPF";
+        $texto = $doc;
         $aFont = array('font'=>$this->fontePadrao, 'size'=>6, 'style'=>'');
         $this->pTextBox($x, $y, $w, $h, $texto, $aFont, 'T', 'L', 1, '');
-        $texto = $this->emit->getElementsByTagName("CNPJ")->item(0)->nodeValue;
-        $texto = $this->pFormat($texto, "##.###.###/####-##");
+        $texto = $this->emit->getElementsByTagName($doc)->item(0)->nodeValue;
+        $texto = $this->pFormat($texto, ($doc === "CNPJ" ? "##.###.###/####-##" : "###.###.###-##"));
         $aFont = array('font'=>$this->fontePadrao, 'size'=>10, 'style'=>'B');
         $this->pTextBox($x, $y, $w, $h, $texto, $aFont, 'B', 'C', 0, '');
 
