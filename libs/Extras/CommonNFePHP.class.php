@@ -346,7 +346,7 @@ class CommonNFePHP
         //estabelecer o fonte
         $this->pdf->SetFont($aFont['font'], $aFont['style'], $aFont['size']);
         //calcular o incremento
-        $incY = $this->pdf->FontSize; //tamanho da fonte na unidade definida
+        $incY = $this->pdf->fontSize; //tamanho da fonte na unidade definida
         if (!$force) {
             //verificar se o texto cabe no espaço
             $n = $this->pdf->WordWrap($text, $w);
@@ -482,7 +482,7 @@ class CommonNFePHP
         //estabelecer o fonte
         $this->pdf->SetFont($aFont['font'], $aFont['style'], $aFont['size']);
         //calcular o incremento
-        $incY = $this->pdf->FontSize; //tamanho da fonte na unidade definida
+        $incY = $this->pdf->fontSize; //tamanho da fonte na unidade definida
         if (!$force) {
             //verificar se o texto cabe no espaço
             $n = $this->pdf->WordWrap($text, $w);

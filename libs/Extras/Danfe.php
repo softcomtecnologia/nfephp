@@ -730,7 +730,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         foreach ($alinhas as $linha) {
             $numlinhasdados += $this->pGetNumLines($linha, $this->wAdic, $fontProduto);
         }
-        $hdadosadic = round(($numlinhasdados+3) * $this->pdf->FontSize, 0);
+        $hdadosadic = round(($numlinhasdados+3) * $this->pdf->fontSize, 0);
         if ($hdadosadic < 10) {
             $hdadosadic = 10;
         }
@@ -767,7 +767,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         while ($i < $this->det->length) {
             $texto = $this->pDescricaoProduto($this->det->item($i));
             $numlinhas = $this->pGetNumLines($texto, $w2, $fontProduto);
-            $hUsado += round(($numlinhas * $this->pdf->FontSize) + ($numlinhas * 0.5), 2);
+            $hUsado += round(($numlinhas * $this->pdf->fontSize) + ($numlinhas * 0.5), 2);
             if ($hUsado > $hDispo) {
                 $totPag++;
                 $hDispo = $hDispo2;
@@ -2521,7 +2521,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
                 $IPI  = $imposto->getElementsByTagName("IPI")->item(0);
                 $textoProduto = $this->pDescricaoProduto($thisItem);
                 $linhaDescr = $this->pGetNumLines($textoProduto, $w2, $aFont);
-                $h = round(($linhaDescr * $this->pdf->FontSize)+ ($linhaDescr * 0.5), 2);
+                $h = round(($linhaDescr * $this->pdf->fontSize)+ ($linhaDescr * 0.5), 2);
                 $hUsado += $h;
                 if ($pag != $totpag) {
                     if ($hUsado >= $hmax && $i < $totItens) {
