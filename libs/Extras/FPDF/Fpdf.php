@@ -1130,7 +1130,7 @@ class Fpdf
         switch ($dest) {
             case 'I':
                 //Send to standard output
-                if (!ob_get_length()) {
+                if (ob_get_length()) {
                     $this->error('Some data has already been output, can\'t send PDF file');
                 }
                 if (php_sapi_name() != 'cli') {
@@ -1149,7 +1149,7 @@ class Fpdf
                 break;
             case 'D':
                 //Download file
-                if (!ob_get_length()) {
+                if (ob_get_length()) {
                     $this->error('Some data has already been output, can\'t send PDF file');
                 }
                 header('Content-Type: application/x-download');
