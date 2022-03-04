@@ -2039,6 +2039,12 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
             case 2:
                 $texto = "(2) Terceiros";
                 break;
+            case 3:
+                $texto = "(3) Próprio Rem.";
+                break;
+            case 4:
+                $texto = "(4) Próprio Dest.";
+                break;
             case 9:
                 $texto = "(9) Sem Frete";
                 break;
