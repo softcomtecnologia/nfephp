@@ -7,7 +7,7 @@ use NFePHP\Extras\PdfNFePHP;
 use NFePHP\Extras\CommonNFePHP;
 use NFePHP\Extras\DocumentoNFePHP;
 use NFePHP\Extras\DomDocumentNFePHP;
-
+ 
 //ajuste do tempo limite de resposta do processo
 //set_time_limit(1800);
 //definição do caminho para o diretorio com as fontes do FDPF
@@ -2034,7 +2034,7 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
                 $texto = "(0) Emitente";
                 break;
             case 1:
-                $texto = "(1) Dest/Rem";
+                $texto = "(1) Dest";
                 break;
             case 2:
                 $texto = "(2) Terceiros";
