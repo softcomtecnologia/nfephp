@@ -567,8 +567,8 @@ class BaseTools
         } elseif ($tipo == 'mdfe') {
             $header = "<mdfeCabecMsg "
                 . "xmlns=\"$namespace\">"
-                . "<cUF>$cUF</cUF>"
-                . "<versaoDados>$version</versaoDados>"
+                //. "<cUF>$cUF</cUF>"
+                //. "<versaoDados>$version</versaoDados>"
                 . "</mdfeCabecMsg>";
         }
         return $header;
