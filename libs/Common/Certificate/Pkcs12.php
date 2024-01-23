@@ -704,7 +704,7 @@ class Pkcs12
         if ($dHoje > $dValid) {
             $this->zRemovePemFiles();
             $this->zLeaveParam();
-            $msg = "Data de validade vencida! [Valido até $dia/$mes/$ano]";
+            $msg = "O seu certificado digital expirou! Valido até: {$dia}/{$mes}/{$ano}";
             $this->error = $msg;
             return false;
         }
