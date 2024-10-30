@@ -395,9 +395,14 @@ class CurlSoap
         $tokenIBPT = '',
         $ncm = '',
         $siglaUF = '',
-        $exTarif = '0'
+        $exTarif = '0',
+        $codInterno = '',
+        $descricao = '',
+        $undMedida = '',
+        $valor = 0,
+        $gtin = ''
     ) {
-        $url = "http://iws.ibpt.org.br/api/Produtos?token=$tokenIBPT&cnpj=$cnpj&codigo=$ncm&uf=$siglaUF&ex=$exTarif";
+        $url = "https://apidoni.ibpt.org.br/api/v1/produtos?token=$tokenIBPT&cnpj=$cnpj&codigo=$ncm&uf=$siglaUF&ex=$exTarif&codigoInterno=$codInterno&descricao=$descricao&unidadeMedida=$undMedida&valor=$valor&gtin=$gtin";
         $resposta = $this->zCommCurl($url, '', array(), 80);
         $retorno = str_replace("\r\n", "|", $resposta);
         $aResp = explode("||", $retorno);

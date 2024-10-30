@@ -2147,22 +2147,34 @@ class ToolsNFe extends BaseTools
      *                 [Importado] => 16.14
      *               )
      */
-    public function getImpostosIBPT($ncm = '', $exTarif = '0', $siglaUF = '')
+    public function getImpostosIBPT($ncm = '', $exTarif = '0', $siglaUF = '', $produto)
     {
         if ($siglaUF == '') {
             $siglaUF = $this->aConfig['siglaUF'];
         }
         $cnpj = $this->aConfig['cnpj'];
         $tokenIBPT = $this->aConfig['tokenIBPT'];
-        if ($ncm == '' || $tokenIBPT == '' || $cnpj == '') {
+        if ($ncm == '' || $tokenIBPT == '' || $cnpj == '' || $produto == null) {
             return array();
         }
+
+        $codInterno = $produto->id;
+        $descricao = str_replace(' ', '%20', $produto->nome);
+        $undMedida = $produto->unidade_medida;
+        $valor = $produto->preco_venda;
+        $gtin = !is_null($produto->codigo_barras) ? $produto->codigo_barras : 'VAZIO';
+
         return $this->oSoap->getIBPTProd(
             $cnpj,
             $tokenIBPT,
             $ncm,
             $siglaUF,
-            $exTarif
+            $exTarif,
+            $codInterno,
+            $descricao,
+            $undMedida,
+            $valor,
+            $gtin
         );
     }
 
