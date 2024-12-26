@@ -2,6 +2,7 @@
 
 namespace NFePHP\Extras;
 
+use Illuminate\Support\Facades\Log;
 use NFePHP\Extras\NfephpException;
 use NFePHP\Extras\PdfNFePHP;
 use NFePHP\Extras\CommonNFePHP;
@@ -2518,6 +2519,10 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         $hUsado = $hCabecItens;
         $aFont = array('font'=>$this->fontePadrao, 'size'=>7, 'style'=>'');
         foreach ($this->det as $d) {
+            if ($this->qtdeItensProc >= $totItens) {
+                // Todos os itens foram processados
+                return $oldY + $hmax;
+            }
             if ($i >= $nInicio) {
                 $thisItem = $this->det->item($i);
                 //carrega as tags do item
@@ -2531,10 +2536,11 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
                 $hUsado += $h;
                 if ($pag != $totpag) {
                     if ($hUsado >= $hmax && $i < $totItens) {
-                        //ultrapassa a capacidade para uma única página
-                        //o restante dos dados serão usados nas proximas paginas
+                        // Atualiza o índice de início para a próxima página
                         $nInicio = $i;
-                        break;
+                    
+                        // Retorna a posição vertical atual, indicando o término da página
+                        return $oldY + $hmax;
                     }
                 }
                 $y_linha=$y+$h;
@@ -2649,12 +2655,22 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
                 }
                 $this->pTextBox($x, $y, $w14, $h, $texto, $aFont, 'T', 'C', 0, '');
                 $y += $h;
+
+                if ($this->qtdeItensProc >= $totItens) {
+                    $nInicio = $totItens; // Marca todos os itens como processados
+                    break;
+                }
+
                 $i++;
                 //incrementa o controle dos itens processados.
                 $this->qtdeItensProc++;
             } else {
                 $i++;
             }
+        }
+        
+        if($nInicio == 0){
+            $nInicio = $totItens; // Todos os itens foram processados
         }
         return $oldY+$hmax;
     }
@@ -3167,4 +3183,3 @@ class Danfe extends CommonNFePHP implements DocumentoNFePHP
         return $this;
     }
 }
-
